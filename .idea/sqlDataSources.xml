@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="3f34c56b-214b-43b9-af79-3cd01f30a18e" name="MusicStoreDB@localhost Mapping">
+      <data-sources db="4862241d-bffb-4483-bb90-a63800a2fc2c" />
+      <scope>
+        <node kind="database" qname="MusicStoreDB" />
+      </scope>
+    </mapping>
+    <mapping uuid="4baddebc-46d4-4d31-b598-f87162bca491" name="postgres@localhost Mapping">
+      <data-sources db="29115410-f48a-4ef5-9421-ca62d52d7d08" />
+    </mapping>
+  </component>
+</project>
