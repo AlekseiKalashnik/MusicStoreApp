@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<div th:each="artist : ${artistsList}">
+<div th:each="artist:${artistsList}">
     <a th:href="@{/artists/{id}(id=${artist.getId()})}"
        th:text="${artist.getName() + ', ' + artist.getNickname()}">artist</a>
 </div>

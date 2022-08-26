@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ArtistDAO {
@@ -25,6 +26,13 @@ public class ArtistDAO {
         return jdbcTemplate.query("SELECT * FROM Artist", new BeanPropertyRowMapper<>(Artist.class));
     }
 
+    public Optional<Artist> showArtistByNickname(String nickname) {
+        return jdbcTemplate.query("SELECT * FROM Artist WHERE nickname=?",
+                new Object[]{nickname}, new BeanPropertyRowMapper<>(Artist.class))
+                .stream()
+                .findAny();
+    }
+
     public Artist showArtistById(int id) {
         return jdbcTemplate.query("SELECT * FROM Artist WHERE id=?",
                         new Object[]{id}, new BeanPropertyRowMapper<>(Artist.class))
@@ -35,7 +43,7 @@ public class ArtistDAO {
     }
 
     public void save(Artist artist) {
-        jdbcTemplate.update("INSERT INTO Artist VALUES(1, ?, ?)", artist.getName(), artist.getNickname());
+        jdbcTemplate.update("INSERT INTO Artist(name, nickname) VALUES(?, ?)", artist.getName(), artist.getNickname());
     }
 
     public void update(int id, Artist updatedArtist) {
