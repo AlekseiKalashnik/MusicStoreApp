@@ -7,19 +7,19 @@ public class Artist {
 
     @NotEmpty(message = "Name shouldn't be empty")
     @Size(min = 1, max = 42, message = "Name should be between 1 and 42 characters")
-    private String name;
+    private String artistName;
 
     @NotEmpty(message = "Nickname shouldn't be empty")
     @Size(min = 1, max = 42, message = "Nickname should be between 1 and 42 characters")
-    private String nickname;
+    private String artistNickname;
 
     public Artist() {
     }
 
-    public Artist(int id, String name, String nickname) {
+    public Artist(int id, String artistName, String artistNickname) {
         this.id = id;
-        this.name = name;
-        this.nickname = nickname;
+        this.artistName = artistName;
+        this.artistNickname = artistNickname;
     }
 
     public int getId() {
@@ -30,19 +30,19 @@ public class Artist {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getArtistName() {
+        return artistName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getArtistNickname() {
+        return artistNickname;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setArtistNickname(String artistNickname) {
+        this.artistNickname = artistNickname;
     }
 }

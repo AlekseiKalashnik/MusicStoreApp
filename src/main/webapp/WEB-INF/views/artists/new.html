@@ -7,13 +7,13 @@
 <body>
 
 <form th:method="POST" th:action="@{/artists}" th:object="${artist}">
-    <label for="name">Enter name: </label>
-    <input type="text" th:field="*{name}" id="name"/>
-    <div style="color:darkred" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+    <label for="artist_name">Enter artist name: </label>
+    <input type="text" th:field="*{artistName}" id="artist_name"/>
+    <div style="color:darkred" th:if="${#fields.hasErrors('artistName')}" th:errors="*{artistName}">Name error</div>
     <br/>
-    <label for="nickname">Enter nickname: </label>
-    <input type="text" th:field="*{nickname}" id="nickname"/>
-    <div style="color:darkred" th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">Nickname of artist error</div>
+    <label for="artist_nickname">Enter artist nickname: </label>
+    <input type="text" th:field="*{artistNickname}" id="artist_nickname"/>
+    <div style="color:darkred" th:if="${#fields.hasErrors('artistNickname')}" th:errors="*{artistNickname}">Nickname of artist error</div>
     <br/>
     <input type="submit" value="Create!"/>
 </form>

@@ -10,7 +10,7 @@
   <label for="artist">Choose artist:</label>
   <select th:object="${artist}" th:field="*{id}" id="artist">
     <option th:each="artist:${artist}" th:value="${artist.getId()}"
-    th:text="${artist.getName()}"></option>
+    th:text="${artist.getArtistName()}"></option>
   </select>
 
   <input type="submit" value="Confirm admin"/>
