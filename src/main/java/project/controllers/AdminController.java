@@ -20,7 +20,7 @@ public class AdminController {
 
     @GetMapping
     public String adminPage(Model model, @ModelAttribute("artist") Artist artist) {
-        model.addAttribute("artist", artist);
+        model.addAttribute("artists", artistDAO.showAllArtists());
 
         return "adminPage";
     }
