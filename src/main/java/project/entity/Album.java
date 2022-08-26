@@ -6,17 +6,31 @@ import java.util.List;
 
 public class Album {
 
+    private int id;
     @NotEmpty(message = "Album name shouldn't be empty")
-    @Size(min = 2, max = 36, message = "Album name should be between 2 and 36 characters")
-    String albumName;
+    @Size(min = 2, max = 100, message = "Album name should be between 2 and 36 characters")
+    private String albumName;
 
-    List<Artist> albumAuthors;
+    @Min(value = 1900, message = "Year should be after 1900")
+    private int albumYear;
+
+    private Artist artist;
 
     public Album() {
     }
 
-    public Album(String albumName) {
+    public Album(String albumName, int albumYear, Artist artist) {
         this.albumName = albumName;
+        this.albumYear = albumYear;
+        this.artist = artist;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAlbumName() {
@@ -27,11 +41,19 @@ public class Album {
         this.albumName = albumName;
     }
 
-    public List<Artist> getAlbumAuthors() {
-        return albumAuthors;
+    public int getAlbumYear() {
+        return albumYear;
     }
 
-    public void setAlbumAuthors(List<Artist> albumAuthors) {
-        this.albumAuthors = albumAuthors;
+    public void setAlbumYear(int albumYear) {
+        this.albumYear = albumYear;
+    }
+
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
 }

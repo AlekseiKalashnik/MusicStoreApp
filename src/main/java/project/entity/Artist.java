@@ -6,11 +6,11 @@ public class Artist {
     private int id;
 
     @NotEmpty(message = "Name shouldn't be empty")
-    @Size(min = 1, max = 42, message = "Name should be between 1 and 42 characters")
+    @Size(min = 1, max = 100, message = "Name should be between 1 and 42 characters")
     private String artistName;
 
     @NotEmpty(message = "Nickname shouldn't be empty")
-    @Size(min = 1, max = 42, message = "Nickname should be between 1 and 42 characters")
+    @Size(min = 1, max = 100, message = "Nickname should be between 1 and 42 characters")
     private String artistNickname;
 
     public Artist() {

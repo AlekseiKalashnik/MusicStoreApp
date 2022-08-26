@@ -10,16 +10,19 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import project.dao.ArtistDAO;
 import project.entity.Artist;
+import project.util.ArtistValidator;
 
 @Controller
 @RequestMapping("/artists")
 public class ArtistController {
 
     private final ArtistDAO artistDAO;
+    private final ArtistValidator artistValidator;
 
     @Autowired
-    public ArtistController(ArtistDAO artistDAO) {
+    public ArtistController(ArtistDAO artistDAO, ArtistValidator artistValidator) {
         this.artistDAO = artistDAO;
+        this.artistValidator = artistValidator;
     }
 
     @GetMapping
@@ -31,6 +34,8 @@ public class ArtistController {
     @GetMapping("/{id}")
     public String showArtistById(@PathVariable("id") int id, Model model) {
         model.addAttribute("artist", artistDAO.showArtistById(id));
+        model.addAttribute("album", artistDAO.getAlbumByArtistId(id));
+
         return "artists/showCertainArtist";
     }
 
@@ -42,6 +47,8 @@ public class ArtistController {
     @PostMapping
     public String create(@ModelAttribute("artist") @Valid Artist artist,
                          BindingResult bindingResult) {
+        artistValidator.validate(artist, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "artists/new";
         }

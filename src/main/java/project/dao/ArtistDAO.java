@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import project.entity.Album;
 import project.entity.Artist;
 
 import java.sql.PreparedStatement;
@@ -31,6 +32,11 @@ public class ArtistDAO {
                         new Object[]{nickname}, new BeanPropertyRowMapper<>(Artist.class))
                 .stream()
                 .findAny();
+    }
+
+    public List<Album> showAlbumsByArtistId(int id) {
+        return jdbcTemplate.query("SELECT * FROM Album WHERE person_id=?", new Object[] {id} ,
+                new BeanPropertyRowMapper<>(Album.class));
     }
 
     public Artist showArtistById(int id) {
