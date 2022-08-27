@@ -7,10 +7,10 @@
 <body>
 
 <form th:method="PATCH" th:action="@{/admin/add}">
-  <label for="artist">Choose artist:</label>
-  <select th:object="${artist}" th:field="*{id}" id="artist">
-    <option th:each="artist : ${artists}" th:value="${artist.getId()}"
-    th:text="${artist.getArtistName()}"></option>
+  <label for="visitor">Choose visitor:</label>
+  <select th:object="${visitor}" th:field="*{id}" id="visitor">
+    <option th:each="visitor : ${artists}" th:value="${visitor.getId()}"
+    th:text="${visitor.getArtistName()}"></option>
   </select>
 
   <input type="submit" value="Confirm admin"/>

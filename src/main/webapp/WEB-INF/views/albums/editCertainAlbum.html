@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Update visitor</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/albums/{id}(id=${album.getId()})}" th:object="${album}">
+    <label for="albumName">Album name: </label>
+    <input type="text" th:field="*{albumName}" id="albumName"/>
+    <div style="color:darkred" th:if="${#fields.hasErrors('albumName')}" th:errors="*{albumName}">Name error</div>
+    <br/>
+    <label for="albumYear">Album year: </label>
+    <input type="text" th:field="*{albumYear}" id="albumYear"/>
+    <div style="color:darkred" th:if="${#fields.hasErrors('albumYear')}" th:errors="*{albumYear}">Year error</div>
+    <br/>
+    <label for="artistName">Artist name: </label>
+    <input type="text" th:field="*{artistName}" id="artistName"/>
+    <div style="color:darkred" th:if="${#fields.hasErrors('artistName')}" th:errors="*{artistName}">Artist name error
+    </div>
+    <br/>
+    <br/>
+    <label for="albumGenre">Album genre: </label>
+    <input type="text" th:field="*{albumGenre}" id="albumGenre"/>
+    <div style="color:darkred" th:if="${#fields.hasErrors('albumGenre')}" th:errors="*{albumGenre}">Genre error</div>
+    <br/>
+    <br/>
+    <label for="albumPrice">Album price: </label>
+    <input type="text" th:field="*{albumPrice}" id="albumPrice"/>
+    <div style="color:darkred" th:if="${#fields.hasErrors('albumPrice')}" th:errors="*{albumPrice}">Price error</div>
+    <br/>
+    <input type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>

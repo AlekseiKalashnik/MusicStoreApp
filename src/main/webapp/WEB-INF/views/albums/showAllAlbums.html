@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>All Albums</title>
+</head>
+<body>
+
+<div th:each="album : ${albumsList}">
+    <a th:href="@{/albums/{id}(id=${album.getId()})}"
+       th:text="${album.getAlbumName() + ', ' + album.getAlbumYear() + ', ' +
+       album.getArtistName() + ', ' + album.getAlbumGenre() + ', ' + album.getAlbumPrice()}">album</a>
+</div>
+
+<br/>
+<hr/>
+
+<a href="/albums/newAlbum">Add new album</a>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>All artists</title>
+</head>
+<body>
+
+<div th:each="visitor : ${visitorsList}">
+    <a th:href="@{/visitors/{id}(id=${visitor.getId()})}"
+       th:text="${visitor.getVisitorName() + ', ' + visitor.getVisitorSurname() + ', ' + visitor.getVisitorBalance()}">visitor</a>
+</div>
+
+<br/>
+<hr/>
+
+<a href="/visitors/newVisitor">Add new visitor</a>
+
+</body>
+</html>

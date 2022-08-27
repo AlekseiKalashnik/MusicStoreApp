@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Show:</title>
+</head>
+<body>
+<p th:text="${album.getAlbumName() + ', ' + album.getAlbumYear() + ', ' + album.getArtistName() + ', ' + album.getAlbumGenre() + ', ' + album.getAlbumPrice()}">
+    VALUE</p>
+
+<div th:if="${owner}">
+    <span>The album have now: </span> <span th:text="${owner.getVisitorName() + ' ' + owner.getVisitorSurname()}">Visitor Name</span>
+
+    <form th:method="PATCH" th:action="@{/albums/{id}/releaseAlbum(id=${album.getId()})}">
+        <input type="submit" value="Return album"/>
+    </form>
+</div>
+
+<div th:if="${visitorsList}">
+    <span>This is free album. Who will take it?</span>
+    <form th:method="PATCH" th:action="@{/albums/{id}/assignAlbum(id=${album.getId()})}">
+        <label for="visitor">Choose visitor</label>
+        <select th:object="${visitor}" th:field="*{id}" id="visitor">
+            <option th:each="visitor : ${visitorsList}" th:value="${visitor.getId()}"
+                    th:text="${visitor.getVisitorName() + ' ' + visitor.getVisitorSurname()}">
+            </option>
+        </select>
+        <input type="submit" value="Assign album">
+    </form>
+</div>
+
+<hr/>
+
+<form th:method="GET" th:action="@{/albums/{id}/editAlbum(id=${album.getId()})}">
+    <input type="submit" value="Edit"/>
+</form>
+
+<form th:method="DELETE" th:action="@{/albums/{id}(id=${album.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+
+</body>
+</html>
+
+
