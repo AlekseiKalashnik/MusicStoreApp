@@ -52,16 +52,15 @@ public class AlbumDAO {
     }
 
     public Optional<Visitor> getAlbumOwner(int id) {
-        return jdbcTemplate.query("SELECT Visitor.* FROM Album JOIN Visitor ON Album.visitor_id = Visitor.id " +
-                        "WHERE Album.id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Visitor.class))
+        return jdbcTemplate.query("SELECT visitor_id FROM visitor_album WHERE album_id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Visitor.class))
                 .stream().findAny();
     }
 
     public void releaseAlbum(int id) {
-        jdbcTemplate.update("UPDATE Album SET visitor_id=NULL WHERE id=?", id);
+        jdbcTemplate.update("UPDATE album SET id=NULL WHERE id=?", id);
     }
 
     public void assignAlbum(int id, Visitor visitor) {
-        jdbcTemplate.update("UPDATE Album SET visitor_id=? WHERE id=?", visitor.getId(), id);
+        jdbcTemplate.update("UPDATE album SET id=? WHERE id=?", visitor.getId(), id);
     }
 }

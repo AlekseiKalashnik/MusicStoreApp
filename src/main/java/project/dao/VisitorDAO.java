@@ -31,12 +31,12 @@ public class VisitorDAO {
     }
 
     public List<Album> getAlbumsByVisitorId(int id) {
-        return jdbcTemplate.query("SELECT * FROM Album WHERE visitor_id=?", new Object[]{id},
+        return jdbcTemplate.query("SELECT * FROM visitor_album WHERE visitor_id=?", new Object[]{id},
                 new BeanPropertyRowMapper<>(Album.class));
     }
 
     public Visitor getVisitorById(int id) {
-        return jdbcTemplate.query("SELECT * FROM Visitor WHERE id=?",
+        return jdbcTemplate.query("SELECT * FROM visitor WHERE id=?",
                         new Object[]{id}, new BeanPropertyRowMapper<>(Visitor.class))
                 .stream()
                 .findAny()
