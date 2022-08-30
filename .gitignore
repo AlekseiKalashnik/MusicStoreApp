@@ -7,7 +7,7 @@
 *.iml
 out
 gen### macOS template
-/src/main/resources/database.properties
+/src/main/resources/hibernate.cfg,xml
 # General
 .DS_Store
 .AppleDouble
