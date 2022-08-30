@@ -12,6 +12,8 @@ import java.util.Optional;
 
 @Component
 public class VisitorDAO {
+    private final JdbcTemplate jdbcTemplate;
+
     @Autowired
     public VisitorDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

@@ -77,9 +77,9 @@
     </dependency>
 
     <dependency>
-      <groupId>org.hibernate</groupId>
+      <groupId>org.hibernate.orm</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>5.4.28.Final</version>
+      <version>6.1.1.Final</version>
     </dependency>
 
     <dependency>
