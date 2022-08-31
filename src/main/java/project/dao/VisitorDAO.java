@@ -1,9 +1,10 @@
 package project.dao;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import project.entity.Album;
 import project.entity.Visitor;
 
@@ -12,49 +13,38 @@ import java.util.Optional;
 
 @Component
 public class VisitorDAO {
-    private final JdbcTemplate jdbcTemplate;
+
+    private final SessionFactory sessionFactory;
 
     @Autowired
-    public VisitorDAO(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public VisitorDAO(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
+    @Transactional(readOnly = true)
     public List<Visitor> getAllVisitors() {
-        return jdbcTemplate.query("SELECT * FROM Visitor", new BeanPropertyRowMapper<>(Visitor.class));
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Visitor", Visitor.class).getResultList();
     }
 
     public Optional<Visitor> getVisitorBySurname(String surname) {
-        return jdbcTemplate.query("SELECT * FROM Visitor WHERE visitor_surname=?",
-                        new Object[]{surname}, new BeanPropertyRowMapper<>(Visitor.class))
-                .stream()
-                .findAny();
+        return null;
     }
 
     public List<Album> getAlbumsByVisitorId(int id) {
-        return jdbcTemplate.query("SELECT * FROM visitor_album WHERE visitor_id=?", new Object[]{id},
-                new BeanPropertyRowMapper<>(Album.class));
+        return null;
     }
 
     public Visitor getVisitorById(int id) {
-        return jdbcTemplate.query("SELECT * FROM visitor WHERE id=?",
-                        new Object[]{id}, new BeanPropertyRowMapper<>(Visitor.class))
-                .stream()
-                .findAny()
-                .orElse(null);
-
+        return null;
     }
 
     public void save(Visitor visitor) {
-        jdbcTemplate.update("INSERT INTO Visitor(visitor_name, visitor_surname, visitor_balance) VALUES(?, ?, ?)",
-                visitor.getVisitorName(), visitor.getVisitorSurname(), visitor.getVisitorBalance());
     }
 
     public void update(int id, Visitor visitor) {
-        jdbcTemplate.update("UPDATE Visitor SET visitor_name=?, visitor_surname=?, visitor_balance=? WHERE id=?",
-                visitor.getVisitorName(), visitor.getVisitorSurname(), visitor.getVisitorBalance(), id);
     }
 
     public void delete(int id) {
-        jdbcTemplate.update("DELETE FROM Visitor WHERE id=?", id);
     }
 }

@@ -1,19 +1,30 @@
 package project.entity;
 
-import javax.validation.constraints.*;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
+@Entity
 public class Visitor {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotEmpty(message = "Name shouldn't be empty")
     @Size(min = 1, max = 100, message = "Name should be between 1 and 42 characters")
+    @Column(name = "visitor_name")
     private String visitorName;
 
     @NotEmpty(message = "Nickname shouldn't be empty")
     @Size(min = 1, max = 100, message = "Nickname should be between 1 and 42 characters")
+    @Column(name = "visitor_surname")
     private String visitorSurname;
 
     @Min(value = 0, message = "Balance should be > 0")
+    @Column(name = "visitor_balance")
     private int visitorBalance;
 
     public Visitor() {
