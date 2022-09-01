@@ -5,10 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import project.dao.AlbumDAO;
-import project.dao.VisitorDAO;
 import project.entity.Album;
-import project.entity.Visitor;
+import project.service.AlbumService;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -17,33 +15,24 @@ import java.util.Optional;
 @RequestMapping("/albums")
 public class AlbumController {
 
-    private final VisitorDAO visitorDAO;
-    private final AlbumDAO albumDAO;
+    private final AlbumService albumService;
 
     @Autowired
-    public AlbumController(VisitorDAO visitorDAO, AlbumDAO albumDAO) {
-        this.visitorDAO = visitorDAO;
-        this.albumDAO = albumDAO;
+    public AlbumController(AlbumService albumService) {
+        this.albumService = albumService;
     }
 
     @GetMapping
     public String showAllAlbums(Model model) {
-        model.addAttribute("albumsList", albumDAO.getAllAlbums());
+        model.addAttribute("albumsList", albumService.findAllAlbums());
 
         return "albums/showAllAlbums";
     }
 
     @GetMapping("/{id}")
-    public String showCertainAlbum(@PathVariable("id") int id, Model model,
-                                   @ModelAttribute("visitor") Visitor visitor) {
-        model.addAttribute("album", albumDAO.getCertainAlbum(id));
+    public String showAlbumById(@PathVariable("id") int id, Model model){
+        model.addAttribute("album", albumService.findAlbumById(id));
 
-        Optional<Visitor> albumOwner = albumDAO.getAlbumOwner(id);
-        if (albumOwner.isPresent()) {
-            model.addAttribute("owner", albumOwner.get());
-        } else {
-            model.addAttribute("visitorsList", visitorDAO.getAllVisitors());
-        }
         return "albums/showCertainAlbum";
     }
 
@@ -56,19 +45,16 @@ public class AlbumController {
     @PostMapping()
     public String create(@ModelAttribute("album") @Valid Album album,
                          BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-
+        if (bindingResult.hasErrors())
             return "albums/new";
-        } else {
-            albumDAO.saveAlbum(album);
-        }
 
+        albumService.save(album);
         return "redirect:/albums";
     }
 
     @GetMapping("/{id}/editAlbum")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("album", albumDAO.getCertainAlbum(id));
+        model.addAttribute("album", albumService.findAlbumById(id));
 
         return "albums/editCertainAlbum";
     }
@@ -76,34 +62,17 @@ public class AlbumController {
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("album") @Valid Album album,
                          BindingResult bindingResult, @PathVariable("id") int id) {
-        if (bindingResult.hasErrors()) {
-
+        if (bindingResult.hasErrors())
             return "albums/editCertainAlbum";
-        } else {
-            albumDAO.updateAlbum(id, album);
 
-            return "redirect:/albums";
-        }
+        albumService.update(id, album);
+        return "redirect:/albums";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
-        albumDAO.deleteAlbum(id);
+        albumService.delete(id);
 
         return "redirect:/albums";
-    }
-
-    @PatchMapping("/{id}/releaseAlbum")
-    public String release(@PathVariable("id") int id) {
-        albumDAO.releaseAlbum(id);
-
-        return "redirect:/albums/" + id;
-    }
-
-    @PatchMapping("/{id}/assignAlbum")
-    public String assign(@PathVariable("id") int id, @ModelAttribute("album") Visitor visitor) {
-        albumDAO.assignAlbum(id, visitor);
-
-        return "redirect:/albums/" + id;
     }
 }

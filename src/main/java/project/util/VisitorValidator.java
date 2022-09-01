@@ -4,17 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import project.dao.VisitorDAO;
 import project.entity.Visitor;
+import project.service.VisitorService;
 
 @Component
 public class VisitorValidator implements Validator {
 
-    private final VisitorDAO visitorDAO;
+    private final VisitorService visitorService;
 
     @Autowired
-    public VisitorValidator(VisitorDAO visitorDAO) {
-        this.visitorDAO = visitorDAO;
+    public VisitorValidator(VisitorService visitorService) {
+        this.visitorService = visitorService;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class VisitorValidator implements Validator {
     public void validate(Object target, Errors errors) {
         Visitor visitor = (Visitor) target;
 
-        if (visitorDAO.getVisitorBySurname(visitor.getVisitorSurname()).isPresent()) {
+        if (visitor.getVisitorSurname()!=null) {
             errors.rejectValue("nickName", "", "Visitor with this nickname has already exist");
         }
     }

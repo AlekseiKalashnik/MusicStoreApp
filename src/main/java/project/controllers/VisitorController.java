@@ -8,34 +8,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import project.dao.VisitorDAO;
 import project.entity.Visitor;
+import project.service.VisitorService;
 import project.util.VisitorValidator;
 
 @Controller
 @RequestMapping("/visitors")
 public class VisitorController {
 
-    private final VisitorDAO visitorDAO;
+    private final VisitorService visitorService;
     private final VisitorValidator visitorValidator;
 
     @Autowired
-    public VisitorController(VisitorDAO visitorDAO, VisitorValidator visitorValidator) {
-        this.visitorDAO = visitorDAO;
+    public VisitorController(VisitorService visitorService, VisitorValidator visitorValidator) {
+        this.visitorService = visitorService;
         this.visitorValidator = visitorValidator;
     }
 
     @GetMapping
     public String showAllVisitors(Model model) {
-        model.addAttribute("visitorsList", visitorDAO.getAllVisitors());
+        model.addAttribute("visitorsList", visitorService.findAllVisitors());
 
         return "visitors/showAllVisitors";
     }
 
     @GetMapping("/{id}")
     public String showVisitorById(@PathVariable("id") int id, Model model) {
-        model.addAttribute("visitor", visitorDAO.getVisitorById(id));
-        model.addAttribute("albumsList", visitorDAO.getAlbumsByVisitorId(id));
+        model.addAttribute("visitor", visitorService.findVisitorById(id));
 
         return "visitors/showCertainVisitor";
     }
@@ -54,13 +53,13 @@ public class VisitorController {
         if (bindingResult.hasErrors())
             return "visitors/new";
 
-        visitorDAO.save(visitor);
+        visitorService.save(visitor);
         return "redirect:/visitors";
     }
 
     @GetMapping("/{id}/editVisitor")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("visitor", visitorDAO.getVisitorById(id));
+        model.addAttribute("visitor", visitorService.findVisitorById(id));
 
         return "visitors/editCertainVisitor";
     }
@@ -71,13 +70,13 @@ public class VisitorController {
         if (bindingResult.hasErrors())
             return "visitors/editCertainVisitor";
 
-        visitorDAO.update(id, visitor);
+        visitorService.update(id, visitor);
         return "redirect:/visitors";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
-        visitorDAO.delete(id);
+        visitorService.delete(id);
 
         return "redirect:/visitors";
     }
