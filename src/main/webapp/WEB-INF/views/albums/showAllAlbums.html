@@ -9,8 +9,7 @@
 
 <div th:each="album : ${albumsList}">
     <a th:href="@{/albums/{id}(id=${album.getId()})}"
-       th:text="${album.getAlbumName() + ', ' + album.getAlbumYear() + ', ' +
-       album.getArtistName() + ', ' + album.getAlbumGenre() + ', ' + album.getAlbumPrice()}">album</a>
+       th:text="${album.getAlbumName() + ', ' + album.getAlbumYear() + ', ' + album.getAlbumGenre() + ', ' + album.getAlbumPrice()}">album</a>
 </div>
 
 <br/>

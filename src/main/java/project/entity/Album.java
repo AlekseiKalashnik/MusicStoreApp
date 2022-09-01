@@ -1,34 +1,42 @@
 package project.entity;
 
+import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
 
+@Entity
 public class Album {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotEmpty(message = "Album name shouldn't be empty")
     @Size(min = 2, max = 100, message = "Album name should be between 2 and 100 characters")
+    @Column(name = "album_name")
     private String albumName;
 
     @Min(value = 1900, message = "Year should be after 1900")
+    @Column(name = "album_year")
     private int albumYear;
 
-    @NotEmpty(message = "Artist name shouldn't be empty")
-    @Size(min = 2, max = 100, message = "Artist name should be between 2 and 100 characters")
-    private String artistName;
-
     @NotEmpty(message = "Genre shouldn't be empty")
+    @Column(name = "album_genre")
     private String albumGenre;
 
     @Min(value = 0, message = "Price should be > 0")
+    @Column(name = "album_price")
     private int albumPrice;
+
+    @ManyToMany(mappedBy = "albumsList")
+    private List<Visitor> visitorsList;
 
     public Album() {
     }
 
-    public Album(String albumName, int albumYear, String artistName, String albumGenre, int albumPrice) {
+    public Album(String albumName, int albumYear, String albumGenre, int albumPrice) {
         this.albumName = albumName;
         this.albumYear = albumYear;
-        this.artistName = artistName;
         this.albumGenre = albumGenre;
         this.albumPrice = albumPrice;
     }
@@ -55,14 +63,6 @@ public class Album {
 
     public void setAlbumYear(int albumYear) {
         this.albumYear = albumYear;
-    }
-
-    public String getArtistName() {
-        return artistName;
-    }
-
-    public void setArtistName(String artistName) {
-        this.artistName = artistName;
     }
 
     public String getAlbumGenre() {

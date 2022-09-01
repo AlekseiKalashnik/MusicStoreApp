@@ -16,12 +16,6 @@
     <input type="text" th:field="*{albumYear}" id="albumYear"/>
     <div style="color:darkred" th:if="${#fields.hasErrors('albumYear')}" th:errors="*{albumYear}">Year error</div>
     <br/>
-    <label for="artistName">Artist name: </label>
-    <input type="text" th:field="*{artistName}" id="artistName"/>
-    <div style="color:darkred" th:if="${#fields.hasErrors('artistName')}" th:errors="*{artistName}">Artist name error
-    </div>
-    <br/>
-    <br/>
     <label for="albumGenre">Album genre: </label>
     <input type="text" th:field="*{albumGenre}" id="albumGenre"/>
     <div style="color:darkred" th:if="${#fields.hasErrors('albumGenre')}" th:errors="*{albumGenre}">Genre error</div>

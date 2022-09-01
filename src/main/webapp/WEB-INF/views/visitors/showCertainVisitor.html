@@ -19,8 +19,7 @@
     <b>Albums: </b>
     <br/>
     <table th:each="album : ${albumsList}">
-        <tr th:text="${album.getArtistName() + ', ' + album.getAlbumYear() + ', ' +
-       album.getArtistName() + ', ' + album.getAlbumGenre() + ', ' + album.getAlbumPrice()}">album
+        <tr th:text="${album.getArtistName() + ', ' + album.getAlbumYear() + ', ' + album.getAlbumGenre() + ', ' + album.getAlbumPrice()}">album
         </tr>
     </table>
     <hr/>

@@ -27,24 +27,41 @@ public class VisitorDAO {
         return session.createQuery("from Visitor", Visitor.class).getResultList();
     }
 
+    @Transactional(readOnly = true)
     public Optional<Visitor> getVisitorBySurname(String surname) {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        Visitor visitor = session.get(Visitor.class, surname);
+        return Optional.ofNullable(visitor);
     }
 
     public List<Album> getAlbumsByVisitorId(int id) {
         return null;
     }
 
+    @Transactional(readOnly = true)
     public Visitor getVisitorById(int id) {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Visitor.class, id);
     }
 
+    @Transactional
     public void save(Visitor visitor) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(visitor);
     }
 
+    @Transactional
     public void update(int id, Visitor visitor) {
+        Session session = sessionFactory.getCurrentSession();
+        Visitor visitorToUpdate = session.get(Visitor.class, id);
+        visitorToUpdate.setVisitorName(visitor.getVisitorName());
+        visitorToUpdate.setVisitorSurname(visitor.getVisitorSurname());
+        visitorToUpdate.setVisitorBalance(visitor.getVisitorBalance());
     }
 
+    @Transactional
     public void delete(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        session.remove(session.get(Visitor.class, id));
     }
 }

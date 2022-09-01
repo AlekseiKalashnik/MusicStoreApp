@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class Visitor {
@@ -26,6 +27,12 @@ public class Visitor {
     @Min(value = 0, message = "Balance should be > 0")
     @Column(name = "visitor_balance")
     private int visitorBalance;
+
+    @ManyToMany
+    @JoinTable(name = "visitor_album",
+    joinColumns = @JoinColumn(name = "visitor_id"),
+    inverseJoinColumns = @JoinColumn(name = "album_id"))
+    private List<Album> albumsList;
 
     public Visitor() {
     }
