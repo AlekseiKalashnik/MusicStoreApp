@@ -1,10 +1,14 @@
 package project.entity;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.List;
+import javax.persistence.*;
+
 
 @Entity
+@Table(name = "album")
 public class Album {
 
     @Id
@@ -28,8 +32,8 @@ public class Album {
     @Column(name = "album_price")
     private int albumPrice;
 
-    @ManyToMany(mappedBy = "albumsList")
-    private List<Visitor> visitorsList;
+    @ManyToMany(mappedBy = "albums")
+    private List<Visitor> visitors;
 
     public Album() {
     }

@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
+@Table(name = "visitor")
 public class Visitor {
 
     @Id
@@ -28,11 +29,12 @@ public class Visitor {
     @Column(name = "visitor_balance")
     private int visitorBalance;
 
-    @ManyToMany
-    @JoinTable(name = "visitor_album",
-    joinColumns = @JoinColumn(name = "visitor_id"),
-    inverseJoinColumns = @JoinColumn(name = "album_id"))
-    private List<Album> albumsList;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "visitor_album",
+            joinColumns = @JoinColumn(name = "visitor_id"),
+            inverseJoinColumns = @JoinColumn(name = "album_id"))
+    private List<Album> albums;
 
     public Visitor() {
     }
