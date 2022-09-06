@@ -13,7 +13,6 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/albums")
 public class AlbumController {
-
     private final AlbumService albumService;
 
     @Autowired
@@ -24,20 +23,17 @@ public class AlbumController {
     @GetMapping
     public String showAllAlbums(Model model) {
         model.addAttribute("albumsList", albumService.findAllAlbums());
-
         return "albums/showAllAlbums";
     }
 
     @GetMapping("/{id}")
-    public String showAlbumById(@PathVariable("id") int id, Model model){
+    public String showAlbumById(@PathVariable("id") int id, Model model) {
         model.addAttribute("album", albumService.findAlbumById(id));
-
         return "albums/showCertainAlbum";
     }
 
     @GetMapping("/newAlbum")
     public String newAlbum(@ModelAttribute("album") Album album) {
-
         return "albums/new";
     }
 
@@ -54,7 +50,6 @@ public class AlbumController {
     @GetMapping("/{id}/editAlbum")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("album", albumService.findAlbumById(id));
-
         return "albums/editCertainAlbum";
     }
 
@@ -71,7 +66,6 @@ public class AlbumController {
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
         albumService.delete(id);
-
         return "redirect:/albums";
     }
 }

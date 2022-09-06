@@ -20,7 +20,6 @@
     <input type="text" th:field="*{albumGenre}" id="albumGenre"/>
     <div style="color:darkred" th:if="${#fields.hasErrors('albumGenre')}" th:errors="*{albumGenre}">Genre error</div>
     <br/>
-    <br/>
     <label for="albumPrice">Album price: </label>
     <input type="text" th:field="*{albumPrice}" id="albumPrice"/>
     <div style="color:darkred" th:if="${#fields.hasErrors('albumPrice')}" th:errors="*{albumPrice}">Price error</div>

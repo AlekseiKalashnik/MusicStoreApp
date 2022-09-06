@@ -6,28 +6,9 @@
     <title>Show:</title>
 </head>
 <body>
-<p th:text="${visitor.getVisitorName() + ', ' + visitor.getVisitorSurname() + ', ' + visitor.getVisitorBalance()}">
-    VALUE</p>
+<p th:text="${visitor.getVisitorName() + ', ' + visitor.getVisitorSurname() + ', ' + visitor.getVisitorBalance()}">VALUE</p>
 
-<div th:if="${albumsList.isEmpty()}">
-    <p>Visitor hasn't taken any album</p>
-    <hr/>
-</div>
-
-<div th:if="${!albumsList.isEmpty()}">
-    <hr/>
-    <b>Albums: </b>
-    <br/>
-    <table th:each="album : ${albumsList}">
-        <tr th:text="${album.getArtistName() + ', ' + album.getAlbumYear() + ', ' + album.getAlbumGenre() + ', ' + album.getAlbumPrice()}">album
-        </tr>
-    </table>
-    <hr/>
-</div>
-
-<form th:method="GET" th:action="@{/visitors/{id}/editVisitor(id=${visitor.getId()})}">
-    <input type="submit" value="Edit"/>
-</form>
+<a th:href="@{/visitors/{id}/editVisitor(id=${visitor.getId()})}">Edit</a>
 
 <form th:method="DELETE" th:action="@{/visitors/{id}(id=${visitor.getId()})}">
     <input type="submit" value="Delete"/>

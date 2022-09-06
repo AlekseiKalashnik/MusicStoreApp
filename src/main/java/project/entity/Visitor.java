@@ -76,4 +76,13 @@ public class Visitor {
     public void setVisitorBalance(int visitorBalance) {
         this.visitorBalance = visitorBalance;
     }
+
+    @Override
+    public String toString() {
+        return "Visitor{" +
+                "visitorName='" + visitorName + '\'' +
+                ", visitorSurname='" + visitorSurname + '\'' +
+                ", visitorBalance=" + visitorBalance +
+                '}';
+    }
 }

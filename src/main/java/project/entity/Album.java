@@ -2,7 +2,6 @@ package project.entity;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.util.List;
 import javax.persistence.*;
 
@@ -16,7 +15,6 @@ public class Album {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotEmpty(message = "Album name shouldn't be empty")
-    @Size(min = 2, max = 100, message = "Album name should be between 2 and 100 characters")
     @Column(name = "album_name")
     private String albumName;
 
@@ -83,5 +81,15 @@ public class Album {
 
     public void setAlbumPrice(int albumPrice) {
         this.albumPrice = albumPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Album{" +
+                "albumName='" + albumName + '\'' +
+                ", albumYear=" + albumYear +
+                ", albumGenre='" + albumGenre + '\'' +
+                ", albumPrice=" + albumPrice +
+                '}';
     }
 }

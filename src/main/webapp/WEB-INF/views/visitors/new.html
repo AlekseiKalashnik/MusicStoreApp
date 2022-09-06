@@ -14,15 +14,11 @@
     <br/>
     <label for="visitorSurname">Surname: </label>
     <input type="text" th:field="*{visitorSurname}" id="visitorSurname"/>
-    <div style="color:darkred" th:if="${#fields.hasErrors('visitorSurname')}" th:errors="*{visitorSurname}">Surname of
-        visitor error
-    </div>
+    <div style="color:darkred" th:if="${#fields.hasErrors('visitorSurname')}" th:errors="*{visitorSurname}">Surname of visitor error</div>
     <br/>
     <label for="visitorBalance">Balance: </label>
     <input type="text" th:field="*{visitorBalance}" id="visitorBalance"/>
-    <div style="color:darkred" th:if="${#fields.hasErrors('visitorBalance')}" th:errors="*{visitorBalance}">Balance of
-        visitor error
-    </div>
+    <div style="color:darkred" th:if="${#fields.hasErrors('visitorBalance')}" th:errors="*{visitorBalance}">Balance of visitor error</div>
     <br/>
     <input type="submit" value="Create!"/>
 </form>
